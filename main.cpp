@@ -43,7 +43,7 @@ int main() {
             {
                 // number to find for each iteration
                 int number_to_find = data[rand() % data.size()];
-                //std::cout<<"to find: "<< number_to_find<<"\n";
+
                 // run it
                 //period[i] = time_it(&linear_search, data.begin(), data.end(), number_to_find);
                 //period[i] = time_it(&binary_search, data.begin(), data.end(), number_to_find);

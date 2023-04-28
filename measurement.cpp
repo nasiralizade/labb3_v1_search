@@ -39,7 +39,7 @@ Node *build_binary_search_tree(std::vector<int>::iterator first, std::vector<int
     }
     auto mid = (first + std::distance(first, last) / 2);
     Node *root = new Node(*mid);
-    root->left = build_binary_search_tree(first, mid - 1);
+    root->left = build_binary_search_tree(first, mid);
     root->right = build_binary_search_tree(mid + 1, last);
     return root;
 }

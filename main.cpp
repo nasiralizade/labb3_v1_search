@@ -27,7 +27,7 @@ int main() {
 
     data = generate_primes(DATA_SIZE * REPETITIONS);
     //hash_table = CreateHashTable(data.begin(), data.end());
-    //tree = CreateBinarySearchTree(data.begin(), data.end());
+    tree = build_binary_search_tree(data.begin(), data.end());
 
 
 
@@ -46,8 +46,8 @@ int main() {
 
                 // run it
                 //period[i] = time_it(&linear_search, data.begin(), data.end(), number_to_find);
-                period[i] = time_it(&binary_search, data.begin(), data.end(), number_to_find);
-                //period[i] = time_it(&binary_tree_search, tree, number_to_find);
+                //period[i] = time_it(&binary_search, data.begin(), data.end(), number_to_find);
+                period[i] = time_it(&binary_search_tree, tree, number_to_find);
                 //period[i] = time_it(&hash_table_search, hash_table.begin(), hash_table.end(), number_to_find);
             }
             os << DATA_SIZE * iter << "\t" << average_value(period) << "\t" << std_dev(period) << "\t" << SAMPLES << '\n';

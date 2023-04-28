@@ -27,3 +27,16 @@ bool binary_search(std::vector<int>::iterator first, std::vector<int>::iterator 
     }
     return false;
 }
+
+bool binary_search_tree(Node *root, int &target) {
+    while (root){
+        if (root->data==target){
+            return true;
+        } else if (target< root->data){
+            root=root->left;
+        } else{
+            root=root->right;
+        }
+    }
+    return false;
+}

@@ -2,6 +2,7 @@
 // Created by Nasir Alizade on 2023-04-28.
 //
 
+#include <iostream>
 #include "measurement.h"
 
 double average_value(std::vector<double> &data) {
@@ -25,9 +26,10 @@ double std_dev(std::vector<double> &data) {
 double time_it(bool (*search_function)(std::vector<int>::iterator, std::vector<int>::iterator, const int &),
                std::vector<int>::iterator first, std::vector<int>::iterator last, int find) {
     auto start = std::chrono::steady_clock::now();
-    search_function(first, last, find);
+    auto found=search_function(first, last, find);
     auto stop = std::chrono::steady_clock::now();
     std::chrono::duration<double, std::micro> total = (stop - start);
+    if (!found) std::cout<<"NOT FOUND: "<<find <<"\n";
     return total.count();
 }
 
@@ -41,3 +43,12 @@ Node *build_binary_search_tree(std::vector<int>::iterator first, std::vector<int
     root->right = build_binary_search_tree(mid + 1, last);
     return root;
 }
+
+double time_it(bool (*search)(Node *, int &), Node *root, int &find) {
+    auto start = std::chrono::steady_clock::now();
+    auto found=search(root,find);
+    auto stop = std::chrono::steady_clock::now();
+    std::chrono::duration<double, std::micro> total = (stop - start);
+    if (!found) { std::cout << "NOT FOUND: " << find << "\n"; }
+    return total.count();}
+

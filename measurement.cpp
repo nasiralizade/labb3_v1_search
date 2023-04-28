@@ -30,3 +30,14 @@ double time_it(bool (*search_function)(std::vector<int>::iterator, std::vector<i
     std::chrono::duration<double, std::micro> total = (stop - start);
     return total.count();
 }
+
+Node *build_binary_search_tree(std::vector<int>::iterator first, std::vector<int>::iterator last) {
+    if (first >= last) {
+        return nullptr;
+    }
+    auto mid = (first + std::distance(first, last) / 2);
+    Node *root = new Node(*mid);
+    root->left = build_binary_search_tree(first, mid - 1);
+    root->right = build_binary_search_tree(mid + 1, last);
+    return root;
+}

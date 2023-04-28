@@ -5,9 +5,9 @@
 #include "measurement.h"
 
 double average_value(std::vector<double> &data) {
-    double sum=std::accumulate(data.begin(), data.end(),0.0);
-    int N=data.size();
-    double avg=sum/N;
+    double sum = std::accumulate(data.begin(), data.end(), 0.0);
+    int N = data.size();
+    double avg = sum / N;
     return avg;
 }
 
@@ -16,9 +16,17 @@ double std_dev(std::vector<double> &data) {
     double avg_val = average_value(data);
     double dev_square = 0;
 
-    for (std::vector<double>::iterator itr = data.begin(); itr != data.end(); itr++) {
-        dev_square += pow((*itr - avg_val), 2);
+    for (double &itr: data) {
+        dev_square += pow((itr - avg_val), 2);
     }
-
     return std::sqrt(dev_square * (1.0 / (N - 1)));
+}
+
+double time_it(bool (*search_function)(std::vector<int>::iterator, std::vector<int>::iterator, const int &),
+               std::vector<int>::iterator first, std::vector<int>::iterator last, int find) {
+    auto start = std::chrono::steady_clock::now();
+    search_function(first, last, find);
+    auto stop = std::chrono::steady_clock::now();
+    std::chrono::duration<double, std::micro> total = (stop - start);
+    return total.count();
 }

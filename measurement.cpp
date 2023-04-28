@@ -26,10 +26,10 @@ double std_dev(std::vector<double> &data) {
 double time_it(bool (*search_function)(std::vector<int>::iterator, std::vector<int>::iterator, const int &),
                std::vector<int>::iterator first, std::vector<int>::iterator last, int find) {
     auto start = std::chrono::steady_clock::now();
-    auto found=search_function(first, last, find);
+    auto found = search_function(first, last, find);
     auto stop = std::chrono::steady_clock::now();
     std::chrono::duration<double, std::micro> total = (stop - start);
-    if (!found) std::cout<<"NOT FOUND: "<<find <<"\n";
+    if (!found) { std::cout << "NOT FOUND: " << find << "\n"; }
     return total.count();
 }
 
@@ -46,9 +46,10 @@ Node *build_binary_search_tree(std::vector<int>::iterator first, std::vector<int
 
 double time_it(bool (*search)(Node *, int &), Node *root, int &find) {
     auto start = std::chrono::steady_clock::now();
-    auto found=search(root,find);
+    auto found = search(root, find);
     auto stop = std::chrono::steady_clock::now();
     std::chrono::duration<double, std::micro> total = (stop - start);
     if (!found) { std::cout << "NOT FOUND: " << find << "\n"; }
-    return total.count();}
+    return total.count();
+}
 

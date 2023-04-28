@@ -5,12 +5,11 @@
 #include "measurement.h"
 #include "node.h"
 #define COUNT 10
-const int DATA_SIZE = 200000;
+const int DATA_SIZE = 50000;
 const int REPETITIONS = 10;
 const int SAMPLES = 10;
 
 
-bool binary_search(std::vector<int>::iterator, std::vector<int>::iterator, const int &);
 
 int main() {
     std::vector<int> data;
@@ -25,9 +24,7 @@ int main() {
 
     std::string filename[] = { "binary_search_tree.txt", "binary_search.txt", "hash_table.txt", "sequential_search.txt" };
 
-    data = generate_primes(DATA_SIZE * REPETITIONS);
-    //hash_table = CreateHashTable(data.begin(), data.end());
-    tree = build_binary_search_tree(data.begin(), data.end());
+
 
 
 
@@ -39,11 +36,14 @@ int main() {
         os << "N\t" << "T[ms]\t" << "dev[ms]\t" << "Samples\n";
         for (int iter = 1; iter <= REPETITIONS; iter++)
         {
+            data = generate_primes(DATA_SIZE * iter);
+            //hash_table = CreateHashTable(data.begin(), data.end());
+            tree = build_binary_search_tree(data.begin(), data.end());
             for (int i = 0; i < SAMPLES; i++)
             {
                 // number to find for each iteration
-                int number_to_find = data[rand() % DATA_SIZE];
-
+                int number_to_find = data[rand() % data.size()];
+                //std::cout<<"to find: "<< number_to_find<<"\n";
                 // run it
                 //period[i] = time_it(&linear_search, data.begin(), data.end(), number_to_find);
                 //period[i] = time_it(&binary_search, data.begin(), data.end(), number_to_find);

@@ -7,16 +7,13 @@
 
 double average_value(std::vector<double> &data) {
     double sum = std::accumulate(data.begin(), data.end(), 0.0);
-    int N = data.size();
-    double avg = sum / N;
-    return avg;
+    return (sum/(data.size()));
 }
 
 double std_dev(std::vector<double> &data) {
     const size_t N = data.size();
     double avg_val = average_value(data);
     double dev_square = 0.0;
-
     for (double &itr: data) {
         dev_square += pow((itr - avg_val), 2);
     }
@@ -28,7 +25,7 @@ double time_it(bool (*search_function)(std::vector<int>::iterator, std::vector<i
     auto start = std::chrono::steady_clock::now();
     auto found = search_function(first, last, find);
     auto stop = std::chrono::steady_clock::now();
-    std::chrono::duration<double, std::micro> total = (stop - start);
+    std::chrono::duration<double, std::nano> total = (stop - start);
     if (!found) { std::cout << "NOT FOUND: " << find << "\n"; }
     return total.count();
 }
@@ -38,17 +35,17 @@ double time_it(bool (*search)(Node *, int &), Node *root, int &find) {
     auto start = std::chrono::steady_clock::now();
     auto found = search(root, find);
     auto stop = std::chrono::steady_clock::now();
-    std::chrono::duration<double, std::micro> total = (stop - start);
+    std::chrono::duration<double, std::nano> total = (stop - start);
     if (!found) { std::cout << "NOT FOUND: " << find << "\n"; }
     return total.count();
 }
 
 double time_it(bool (*search)(std::vector<hash_node *>::iterator, std::vector<hash_node *>::iterator,  int &),
                std::vector<hash_node *>::iterator first, std::vector<hash_node *>::iterator last, int &number) {
-    auto start = std::chrono::high_resolution_clock::now();
+    auto start = std::chrono::steady_clock::now();
     auto found=search(first, last, number);
-    auto stop = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double, std::micro> total = (stop - start);
+    auto stop = std::chrono::steady_clock::now();
+    std::chrono::duration<double, std::nano> total = (stop - start);
     if (!found) { std::cout << "NOT FOUND: " << number << "\n"; }
     return total.count();
 }

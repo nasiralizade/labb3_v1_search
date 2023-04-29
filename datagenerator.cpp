@@ -5,9 +5,13 @@
 #include "datagenerator.h"
 
 std::vector<int> generate_primes(int limit) {
+    assert(limit >= 2);
+    // Initialize a boolean vector to track whether each number is prime
     std::vector<bool> is_prime(limit + 1, true);
     is_prime[0] = false;
     is_prime[1] = false;
+
+    // Use the Sieve of Eratosthenes algorithm to mark non-prime numbers
     for (int p = 2; p * p <= limit; p++) {
         if (is_prime[p]) {
             for (int i = p * p; i <= limit; i += p) {
@@ -15,6 +19,8 @@ std::vector<int> generate_primes(int limit) {
             }
         }
     }
+
+    // Create a vector of prime numbers from the boolean vector
     std::vector<int> primes;
     for (int i = 2; i <= limit; i++) {
         if (is_prime[i]) {

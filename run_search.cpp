@@ -3,13 +3,14 @@
 //
 #include "algorithms.h"
 #include "run_search.h"
+
 void run_search(int choice, int SIZE, int REPETITIONS, int SAMPLES) {
     std::vector<int> data;
+    std::vector<int> targets;
     std::vector<double> period(SAMPLES);
 
     std::vector<hash_node *> hash_table;
     Node *tree = nullptr;
-
 
     std::string filename[] = {"linear_search.txt", "binary_search.txt", "binary_search_tree.txt", "hash_table.txt"};
     std::string search_alg[] = {"linear_search", "binary_search", "binary_search_tree", "hash_table"};
@@ -28,6 +29,7 @@ void run_search(int choice, int SIZE, int REPETITIONS, int SAMPLES) {
             for (int i = 0; i < SAMPLES; i++) {
                 // number to find for each iteration
                 int number_to_find = data[rand() % data.size()];
+                targets.push_back(number_to_find);
 
                 // run it
                 if (choice == 1) {
@@ -43,6 +45,7 @@ void run_search(int choice, int SIZE, int REPETITIONS, int SAMPLES) {
                     period[i] = time_it(&hashtable_search, hash_table.begin(), hash_table.end(), number_to_find);
                 }
             }
+
             os << SIZE * iter << "\t" << average_value(period) << "\t" << std_dev(period) << "\t" << SAMPLES << '\n';
             std::cout << SIZE * iter << "\t" << average_value(period) << "\t" << std_dev(period) << "\t" << SAMPLES
                       << '\n';
@@ -50,6 +53,7 @@ void run_search(int choice, int SIZE, int REPETITIONS, int SAMPLES) {
         os.close();
     }
 }
+
 
 /**
  * deleting files if they exist.

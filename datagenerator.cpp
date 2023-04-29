@@ -23,6 +23,7 @@ std::vector<int> generate_primes(int limit) {
     }
     return primes;
 }
+
 Node *build_binary_search_tree(std::vector<int>::iterator first, std::vector<int>::iterator last) {
     if (first >= last) {
         return nullptr;
@@ -35,18 +36,17 @@ Node *build_binary_search_tree(std::vector<int>::iterator first, std::vector<int
 }
 
 std::vector<hash_node *> build_hashtable(std::vector<int>::iterator first, std::vector<int>::iterator last) {
-    std::vector<hash_node*> build_hashtable(std::vector<int>::iterator first, std::vector<int>::iterator last) {
-        int reserved_size = std::distance(first, last);
-        std::vector<hash_node*> hashtable(reserved_size, nullptr);
+    int reserved_size = std::distance(first, last);
+    std::vector<hash_node *> hashtable(reserved_size, nullptr);
 
-        for (auto it = first; it != last; ++it) {
-            insert_into_hashtable(hashtable, *it, reserved_size);
-        }
-
-        return hashtable;
+    for (auto it = first; it != last; ++it) {
+        insert_into_hashtable(hashtable, *it, reserved_size);
     }
+
+    return hashtable;
 }
-void insert_into_hashtable(std::vector<hash_node*>& hashtable, int data, int reserved_size) {
+
+void insert_into_hashtable(std::vector<hash_node *> &hashtable, int data, int reserved_size) {
     int hash = data % reserved_size;
     if (!hashtable[hash]) {
         hashtable[hash] = new hash_node(data);

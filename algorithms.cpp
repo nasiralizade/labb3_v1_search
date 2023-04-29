@@ -54,3 +54,13 @@ bool search_hashtable(std::vector<std::unique_ptr<hash_node>> &hashtable, int da
     }
     return false;
 }
+
+bool hashtable_search(std::vector<hash_node *>::iterator first, std::vector<hash_node *>::iterator last, int &find) {
+    hash_node* node_index=*(first+(find% std::distance(first,last)));
+    while (node_index!= nullptr){
+        if (node_index->data==find){
+            return true;
+        }node_index=node_index->next;
+    }
+    return false;
+}

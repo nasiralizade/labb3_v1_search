@@ -22,8 +22,6 @@ void delete_files();
 
 void run_search(int choice, int SIZE, int REPETITIONS, int SAMPLES);
 
-std::vector<hash_node *> build_hashtable(auto anAuto, auto anAuto1);
-
 int main() {
     srand(time(nullptr));
     menu();
@@ -107,7 +105,7 @@ void run_search(int choice, int SIZE, int REPETITIONS, int SAMPLES) {
                     period[i] = time_it(&binary_search_tree, tree, number_to_find);
                 }
                 if (choice == 4) {
-                    //period[i] = time_it(&search_hashtable, hash_table.begin(), hash_table.end(), number_to_find);
+                    period[i] = time_it(&hashtable_search, hash_table.begin(), hash_table.end(), number_to_find);
                 }
             }
             os << SIZE * iter << "\t" << average_value(period) << "\t" << std_dev(period) << "\t" << SAMPLES << '\n';
@@ -119,11 +117,13 @@ void run_search(int choice, int SIZE, int REPETITIONS, int SAMPLES) {
 }
 
 
+
+
 /**
  * deleting files if they exist.
  */
 void delete_files() {
-    std::string filename[] = {"binary_search_tree.txt", "binary_search.txt", "hash_table.txt", "sequential_search.txt"};
+    std::string filename[] = {"linear_search.txt", "binary_search.txt", "binary_search_tree.txt", "hash_table.txt"};
     for (const auto &file: filename) {
         if (remove(file.c_str()) != 0) {
             std::cerr << RED "Error removing file " END << file << std::endl;

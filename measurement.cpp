@@ -34,7 +34,6 @@ double time_it(bool (*search_function)(std::vector<int>::iterator, std::vector<i
 }
 
 
-
 double time_it(bool (*search)(Node *, int &), Node *root, int &find) {
     auto start = std::chrono::steady_clock::now();
     auto found = search(root, find);
@@ -43,8 +42,9 @@ double time_it(bool (*search)(Node *, int &), Node *root, int &find) {
     if (!found) { std::cout << "NOT FOUND: " << find << "\n"; }
     return total.count();
 }
-double time_it(bool(*search)(std::vector<hash_node*>::iterator, std::vector<hash_node*>::iterator, const int&), std::vector<hash_node*>::iterator first, std::vector<hash_node*>::iterator last,  int& number)
-{
+
+double time_it(bool (*search)(std::vector<hash_node *>::iterator, std::vector<hash_node *>::iterator,  int &),
+               std::vector<hash_node *>::iterator first, std::vector<hash_node *>::iterator last, int &number) {
     auto start = std::chrono::high_resolution_clock::now();
     auto found=search(first, last, number);
     auto stop = std::chrono::high_resolution_clock::now();
@@ -52,4 +52,8 @@ double time_it(bool(*search)(std::vector<hash_node*>::iterator, std::vector<hash
     if (!found) { std::cout << "NOT FOUND: " << number << "\n"; }
     return total.count();
 }
+
+
+
+
 

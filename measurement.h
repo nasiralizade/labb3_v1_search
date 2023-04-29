@@ -16,9 +16,9 @@ double time_it(bool (*search_function)(std::vector<int>::iterator, std::vector<i
 
 double time_it(bool (*search)(Node *, int &), Node *root, int &find);
 
-double time_it(bool(*search)(std::vector<hash_node *>::iterator, std::vector<hash_node *>::iterator, const int &),
-                std::vector<hash_node *>::iterator first, std::vector<hash_node *>::iterator last,  int &number);
 
+double time_it(bool(*search)(std::vector<hash_node *>::iterator, std::vector<hash_node *>::iterator,  int &),
+                std::vector<hash_node *>::iterator first, std::vector<hash_node *>::iterator last,  int &number);
 double average_value(std::vector<double> &data);
 
 double std_dev(std::vector<double> &data);

@@ -23,3 +23,38 @@ std::vector<int> generate_primes(int limit) {
     }
     return primes;
 }
+Node *build_binary_search_tree(std::vector<int>::iterator first, std::vector<int>::iterator last) {
+    if (first >= last) {
+        return nullptr;
+    }
+    auto mid = (first + std::distance(first, last) / 2);
+    Node *root = new Node(*mid);
+    root->left = build_binary_search_tree(first, mid);
+    root->right = build_binary_search_tree(mid + 1, last);
+    return root;
+}
+
+std::vector<hash_node *> build_hashtable(std::vector<int>::iterator first, std::vector<int>::iterator last) {
+    std::vector<hash_node*> build_hashtable(std::vector<int>::iterator first, std::vector<int>::iterator last) {
+        int reserved_size = std::distance(first, last);
+        std::vector<hash_node*> hashtable(reserved_size, nullptr);
+
+        for (auto it = first; it != last; ++it) {
+            insert_into_hashtable(hashtable, *it, reserved_size);
+        }
+
+        return hashtable;
+    }
+}
+void insert_into_hashtable(std::vector<hash_node*>& hashtable, int data, int reserved_size) {
+    int hash = data % reserved_size;
+    if (!hashtable[hash]) {
+        hashtable[hash] = new hash_node(data);
+    } else {
+        auto new_node = new hash_node(data);
+        new_node->next = hashtable[hash];
+        hashtable[hash] = new_node;
+    }
+}
+
+

@@ -15,7 +15,7 @@ double average_value(std::vector<double> &data) {
 double std_dev(std::vector<double> &data) {
     const size_t N = data.size();
     double avg_val = average_value(data);
-    double dev_square = 0;
+    double dev_square = 0.0;
 
     for (double &itr: data) {
         dev_square += pow((itr - avg_val), 2);
@@ -33,16 +33,7 @@ double time_it(bool (*search_function)(std::vector<int>::iterator, std::vector<i
     return total.count();
 }
 
-Node *build_binary_search_tree(std::vector<int>::iterator first, std::vector<int>::iterator last) {
-    if (first >= last) {
-        return nullptr;
-    }
-    auto mid = (first + std::distance(first, last) / 2);
-    Node *root = new Node(*mid);
-    root->left = build_binary_search_tree(first, mid);
-    root->right = build_binary_search_tree(mid + 1, last);
-    return root;
-}
+
 
 double time_it(bool (*search)(Node *, int &), Node *root, int &find) {
     auto start = std::chrono::steady_clock::now();
@@ -50,6 +41,15 @@ double time_it(bool (*search)(Node *, int &), Node *root, int &find) {
     auto stop = std::chrono::steady_clock::now();
     std::chrono::duration<double, std::micro> total = (stop - start);
     if (!found) { std::cout << "NOT FOUND: " << find << "\n"; }
+    return total.count();
+}
+double time_it(bool(*search)(std::vector<hash_node*>::iterator, std::vector<hash_node*>::iterator, const int&), std::vector<hash_node*>::iterator first, std::vector<hash_node*>::iterator last,  int& number)
+{
+    auto start = std::chrono::high_resolution_clock::now();
+    auto found=search(first, last, number);
+    auto stop = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::micro> total = (stop - start);
+    if (!found) { std::cout << "NOT FOUND: " << number << "\n"; }
     return total.count();
 }
 

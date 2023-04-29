@@ -29,14 +29,28 @@ bool binary_search(std::vector<int>::iterator first, std::vector<int>::iterator 
 }
 
 bool binary_search_tree(Node *root, int &target) {
-    while (root){
-        if (root->data==target){
+    while (root) {
+        if (root->data == target) {
             return true;
-        }else if (target < root->data){
-            root=root->left;
-        } else{
-            root=root->right;
+        } else if (target < root->data) {
+            root = root->left;
+        } else {
+            root = root->right;
         }
+    }
+    return false;
+}
+
+bool search_hashtable(std::vector<std::unique_ptr<hash_node>> &hashtable, int data, int reserved_size) {
+    int hash = data % reserved_size;
+    auto &item = hashtable[hash];
+    auto current = item.get();
+    while (current) {
+        if (current->data == data) {
+            return true;
+        }
+        current = current->next;
+
     }
     return false;
 }

@@ -14,10 +14,10 @@ double std_dev(std::vector<double> &data) {
     const size_t N = data.size();
     double avg_val = average_value(data);
     double dev_square = 0.0;
-    for (double &itr: data) {
+    for (const double &itr: data) {
         dev_square += pow((itr - avg_val), 2);
     }
-    return std::sqrt(dev_square * (1.0 / (N - 1)));
+    return std::sqrt(dev_square / (N - 1));
 }
 
 double time_it(bool (*search_function)(std::vector<int>::iterator, std::vector<int>::iterator, const int &),

@@ -1,12 +1,12 @@
 //
 // Created by Nasir Alizade on 2023-04-29.
 //
+#include <random>
 #include "algorithms.h"
 #include "run_search.h"
 
 void run_search(int choice, int SIZE, int REPETITIONS, int SAMPLES) {
     std::vector<int> data;
-    std::vector<int> targets;
     std::vector<double> period(SAMPLES);
 
     std::vector<hash_node *> hash_table;
@@ -24,13 +24,15 @@ void run_search(int choice, int SIZE, int REPETITIONS, int SAMPLES) {
         std::cout << "N\t" << "T[µs]\t" << "dev[µs]\t" << "Samples\n";
         for (int iter = 1; iter <= REPETITIONS; iter++) {
             data = generate_primes(SIZE * iter);
+            //data = generate_random(SIZE * iter);
             hash_table = build_hashtable(data.begin(), data.end());
             tree = build_binary_search_tree(data.begin(), data.end());
+            std::default_random_engine generator;
+            std::uniform_int_distribution<int> distribution(0, data.size()-1);
             for (int i = 0; i < SAMPLES; i++) {
                 // number to find for each iteration
-                int number_to_find = data[rand() % data.size()];
-                targets.push_back(number_to_find);
-
+                //int number_to_find = data[rand() % data.size()];
+                int number_to_find = data[distribution(generator)];
                 // run it
                 if (choice == 1) {
                     period[i] = time_it(&linear_search, data.begin(), data.end(), number_to_find);

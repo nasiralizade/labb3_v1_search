@@ -27,7 +27,6 @@ bool binary_search(std::vector<int>::iterator first, std::vector<int>::iterator 
     }
     return false;
 }
-
 bool binary_search_tree(Node *root, int &target) {
     if (!root){
         return false;

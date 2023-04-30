@@ -13,7 +13,7 @@ Node* build_binary_search_tree(std::vector<int>::iterator first,std::vector<int>
 
 
 std::vector<hash_node *> build_hashtable(std::vector<int>::iterator first,std::vector<int>::iterator last);
+
 void insert_into_hashtable(std::vector<hash_node*>& hashtable, int data, int reserved_size);
-
-
+std::vector<int>generate_random(int limit);
 #endif //LABB3_V1_DATAGENERATOR_H

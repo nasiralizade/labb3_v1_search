@@ -6,9 +6,9 @@
 #define BLUE "\033[94m"
 #define END "\033[0m"
 #define COUNT 10
-const auto SIZE = 1000;
-const auto REPETITIONS = 10;
-const auto SAMPLES = 10;
+const auto SIZE = 1000000;
+const auto REPETITIONS = 20;
+const auto SAMPLES = 10000;
 
 void menu();
 
@@ -16,13 +16,11 @@ void menu();
 
 int main() {
     srand(time(nullptr));
-    std::vector<int>test;
-    test=generate_primes(1);
-    //menu();
+    std::vector<int>test{2,4,1,4,7,3,146,23,1,5};
 
-    // Print functions
-    //printHash(hash_table);*/
-    //print2DUtil(tree, 0);
+    menu();
+
+
 
     return 0;
 }

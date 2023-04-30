@@ -2,9 +2,13 @@
 // Created by Nasir Alizade on 2023-04-28.
 //
 
+#include <fstream>
+#include <iostream>
 #include "datagenerator.h"
 
 std::vector<int> generate_primes(int limit) {
+    // Delete old primes.txt file
+    std::remove("primes.txt");
     assert(limit >= 2);
     // Initialize a boolean vector to track whether each number is prime
     std::vector<bool> is_prime(limit + 1, true);
@@ -26,6 +30,16 @@ std::vector<int> generate_primes(int limit) {
         if (is_prime[i]) {
             primes.push_back(i);
         }
+    }
+    // Write primes to file
+    std::ofstream outfile("primes.txt");
+    if (outfile.is_open()) {
+        for (int prime : primes) {
+            outfile << prime << '\n';
+        }
+        outfile.close();
+    } else {
+        std::cerr << "Error: failed to open primes.txt for writing\n";
     }
     return primes;
 }
@@ -63,10 +77,26 @@ void insert_into_hashtable(std::vector<hash_node *> &hashtable, int data, int re
 }
 
 std::vector<int> generate_random(int limit) {
+
     std::vector<int>data;
     for (int i = 0; i < limit; ++i) {
         data.push_back(rand());
     }std::sort(data.begin(), data.end());
+    return data;
+}
+
+std::vector<int> read_data_from_file(const std::string &filename) {
+    std::vector<int> data;
+    std::ifstream infile(filename);
+    if (infile.is_open()) {
+        int value;
+        while (infile >> value) {
+            data.push_back(value);
+        }
+        infile.close();
+    } else {
+        std::cerr << "Error: failed to open file " << filename << " for reading\n";
+    }
     return data;
 }
 

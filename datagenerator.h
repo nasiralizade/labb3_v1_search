@@ -16,4 +16,5 @@ std::vector<hash_node *> build_hashtable(std::vector<int>::iterator first,std::v
 
 void insert_into_hashtable(std::vector<hash_node*>& hashtable, int data, int reserved_size);
 std::vector<int>generate_random(int limit);
+std::vector<int> read_data_from_file(const std::string& filename);
 #endif //LABB3_V1_DATAGENERATOR_H

@@ -10,15 +10,17 @@ BLUE = '\033[94m'
 END = '\033[0m'
 
 
-# Define the function to fit
+# Define the function to fit for O(log(n))
 def f(x, a, b):
     return a * (np.log(x)) + b
 
 
+# linear fit O(n)
 def g(x, a, b):
     return a * x + b
 
 
+# to fit, time complexity for hashtable search
 def h(x, a, b):
     return a * x + b
 
@@ -39,10 +41,10 @@ def plot_files(choice):
     datafile3 = 'cmake-build-release/binary_search_tree.txt'
     datafile4 = 'cmake-build-release/hash_table.txt'
 
-    data = np.genfromtxt(datafile1, delimiter='\t', skip_header=2, max_rows=10)
-    data2 = np.genfromtxt(datafile2, delimiter='\t', skip_header=2, max_rows=10)
-    data3 = np.genfromtxt(datafile3, delimiter='\t', skip_header=2, max_rows=10)
-    data4 = np.genfromtxt(datafile4, delimiter='\t', skip_header=2, max_rows=10)
+    data = np.genfromtxt(datafile1, delimiter='\t', skip_header=1, max_rows=10)
+    data2 = np.genfromtxt(datafile2, delimiter='\t', skip_header=1, max_rows=10)
+    data3 = np.genfromtxt(datafile3, delimiter='\t', skip_header=1, max_rows=10)
+    data4 = np.genfromtxt(datafile4, delimiter='\t', skip_header=1, max_rows=10)
 
     # Extract the x, y, and error bar values
     x = data[:, 0]

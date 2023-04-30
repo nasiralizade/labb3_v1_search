@@ -6,8 +6,8 @@
 #include "run_search.h"
 
 void run_search(int choice, int SIZE, int REPETITIONS, int SAMPLES) {
-    std::vector<int> data;
-    std::vector<double> period(SAMPLES);
+    std::vector<int> data; //data to search in
+    std::vector<double> period(SAMPLES); //saves time to then calc avg
 
     std::vector<hash_node *> hash_table;
     Node *tree = nullptr;
@@ -24,15 +24,19 @@ void run_search(int choice, int SIZE, int REPETITIONS, int SAMPLES) {
         std::cout << "N\t" << "T[µs]\t" << "dev[µs]\t" << "Samples\n";
         for (int iter = 1; iter <= REPETITIONS; iter++) {
             data = generate_primes(SIZE * iter);
+            //data= read_data_from_file()
+            //std::sort(data.begin(), data.end());
             //data = generate_random(SIZE * iter);
             hash_table = build_hashtable(data.begin(), data.end());
             tree = build_binary_search_tree(data.begin(), data.end());
-            std::default_random_engine generator;
-            std::uniform_int_distribution<int> distribution(0, data.size()-1);
+
             for (int i = 0; i < SAMPLES; i++) {
+                std::random_device rd;
+                std::mt19937 gen(rd());
+                std::uniform_int_distribution<> dis(0, data.size() - 1);
                 // number to find for each iteration
-                //int number_to_find = data[rand() % data.size()];
-                int number_to_find = data[distribution(generator)];
+                int number_to_find = data[dis(gen)];
+                //int number_to_find =data[distribution(generator)];
                 // run it
                 if (choice == 1) {
                     period[i] = time_it(&linear_search, data.begin(), data.end(), number_to_find);

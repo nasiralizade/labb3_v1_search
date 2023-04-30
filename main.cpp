@@ -6,9 +6,9 @@
 #define BLUE "\033[94m"
 #define END "\033[0m"
 #define COUNT 10
-const auto SIZE = 1000000;
-const auto REPETITIONS = 20;
-const auto SAMPLES = 10000;
+const auto SIZE = 20000;
+const auto REPETITIONS = 10;
+const auto SAMPLES = 50;
 
 void menu();
 
@@ -16,8 +16,7 @@ void menu();
 
 int main() {
     srand(time(nullptr));
-    std::vector<int>test{2,4,1,4,7,3,146,23,1,5};
-
+    generate_primes(SIZE*REPETITIONS);
     menu();
 
 

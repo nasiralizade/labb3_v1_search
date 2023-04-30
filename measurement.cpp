@@ -25,7 +25,7 @@ double time_it(bool (*search_function)(std::vector<int>::iterator, std::vector<i
     auto start = std::chrono::steady_clock::now();
     auto found = search_function(first, last, find);
     auto stop = std::chrono::steady_clock::now();
-    std::chrono::duration<double, std::nano> total = (stop - start);
+    std::chrono::duration<double, std::micro> total = (stop - start);
     if (!found) { std::cout << "NOT FOUND: " << find << "\n"; }
     return total.count();
 }
@@ -35,7 +35,7 @@ double time_it(bool (*search)(Node *, int &), Node *root, int &find) {
     auto start = std::chrono::steady_clock::now();
     auto found = search(root, find);
     auto stop = std::chrono::steady_clock::now();
-    std::chrono::duration<double, std::nano> total = (stop - start);
+    std::chrono::duration<double, std::micro> total = (stop - start);
     if (!found) { std::cout << "NOT FOUND: " << find << "\n"; }
     return total.count();
 }
@@ -45,7 +45,7 @@ double time_it(bool (*search)(std::vector<hash_node *>::iterator, std::vector<ha
     auto start = std::chrono::steady_clock::now();
     auto found=search(first, last, number);
     auto stop = std::chrono::steady_clock::now();
-    std::chrono::duration<double, std::nano> total = (stop - start);
+    std::chrono::duration<double, std::micro> total = (stop - start);
     if (!found) { std::cout << "NOT FOUND: " << number << "\n"; }
     return total.count();
 }

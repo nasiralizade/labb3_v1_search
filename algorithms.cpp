@@ -2,11 +2,15 @@
 // Created by Nasir Alizade on 2023-04-28.
 //
 
+#include <iostream>
 #include "algorithms.h"
+#include "run_search.h"
 
 bool linear_search(std::vector<int>::iterator first, std::vector<int>::iterator last, const int &target) {
-    for (auto i = first; first != last; i++) {
+    for (auto i = first; i != last; i++) {
+
         if (*i == target) {
+
             return true;
         }
     }

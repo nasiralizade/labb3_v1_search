@@ -40,11 +40,11 @@ def plot_files(choice):
     datafile2 = 'cmake-build-release/binary_search.txt'
     datafile3 = 'cmake-build-release/binary_search_tree.txt'
     datafile4 = 'cmake-build-release/hash_table.txt'
-
-    data = np.genfromtxt(datafile1, delimiter='\t', skip_header=1, max_rows=10)
-    data2 = np.genfromtxt(datafile2, delimiter='\t', skip_header=1, max_rows=10)
-    data3 = np.genfromtxt(datafile3, delimiter='\t', skip_header=1, max_rows=10)
-    data4 = np.genfromtxt(datafile4, delimiter='\t', skip_header=1, max_rows=10)
+    sample = 100
+    data = np.genfromtxt(datafile1, delimiter='\t', skip_header=2, max_rows=sample)
+    data2 = np.genfromtxt(datafile2, delimiter='\t', skip_header=2, max_rows=sample)
+    data3 = np.genfromtxt(datafile3, delimiter='\t', skip_header=2, max_rows=sample)
+    data4 = np.genfromtxt(datafile4, delimiter='\t', skip_header=2, max_rows=sample)
 
     # Extract the x, y, and error bar values
     x = data[:, 0]
@@ -96,9 +96,10 @@ def plot_files(choice):
 
     # Create the plot
     fig, ax = plt.subplots()
+    # fig, ax = plt.subplots(2, 2, figsize=(16, 8))
     if choice == '1':
-        ax.errorbar(x, y, yerr=err, fmt='yo', label='mätvärde')
-        ax.plot(x, g(x, *popt), 'y-', label=r'$linear search$')
+        ax.errorbar(x, y, yerr=err, fmt='ro', label='mätvärde')
+        ax.plot(x, g(x, *popt), 'b-', label=r'$linear search$')
     if choice == '2':
         ax.errorbar(x2, y2, yerr=err2, fmt='ro', label='mätvärde')
         ax.plot(x2, f(x2, *popt2), 'r-', label=r'$Binary search$')

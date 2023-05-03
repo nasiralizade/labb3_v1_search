@@ -4,13 +4,10 @@
 
 #include <iostream>
 #include "algorithms.h"
-#include "run_search.h"
 
 bool linear_search(std::vector<int>::iterator first, std::vector<int>::iterator last, const int &target) {
     for (auto i = first; i != last; i++) {
-
         if (*i == target) {
-
             return true;
         }
     }
@@ -48,10 +45,10 @@ bool binary_search_tree(Node *root, int &target) {
 }
 
 
-bool hashtable_search(std::vector<hash_node *>::iterator first, std::vector<hash_node *>::iterator last, int &find) {
-    hash_node* node_index=*(first+(find% std::distance(first,last)));
+bool hashtable_search(std::vector<hash_node *>::iterator first, std::vector<hash_node *>::iterator last, int &target) {
+    hash_node* node_index=*(first+(target % std::distance(first, last)));
     while (node_index!= nullptr){
-        if (node_index->data==find){
+        if (node_index->data == target){
             return true;
         }node_index=node_index->next;
     }
